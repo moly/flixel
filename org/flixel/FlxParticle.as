@@ -45,8 +45,6 @@ package org.flixel
 		override public function update():void
 		{
 			//lifespan behavior
-			if(lifespan <= 0)
-				return;
 			lifespan -= FlxG.elapsed;
 			if(lifespan <= 0)
 				kill();

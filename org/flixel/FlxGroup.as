@@ -217,7 +217,8 @@ package org.flixel
 		 * <p>If you specified a maximum size for this group (like in FlxEmitter),
 		 * then recycle will employ what we're calling "rotating" recycling.
 		 * Recycle() will first check to see if the group is at capacity yet.
-		 * If group is not yet at capacity, recycle() returns a new object.
+		 * If group is not yet at capacity, recycle() returns either the first
+		 * object with exists == false, or, finding none, a new object.
 		 * If the group IS at capacity, then recycle() just returns the next object in line.</p>
 		 * 
 		 * <p>If you did NOT specify a maximum size for this group,
@@ -237,21 +238,12 @@ package org.flixel
 		public function recycle(ObjectClass:Class=null):FlxBasic
 		{
 			var basic:FlxBasic;
-			if(_maxSize > 0)
+			if(_maxSize > 0 && length >= _maxSize)
 			{
-				if(length < _maxSize)
-				{
-					if(ObjectClass == null)
-						return null;
-					return add(new ObjectClass() as FlxBasic);
-				}
-				else
-				{
-					basic = members[_marker++];
-					if(_marker >= _maxSize)
-						_marker = 0;
-					return basic;
-				}
+				basic = members[_marker++];
+				if(_marker >= _maxSize)
+					_marker = 0;
+				return basic;
 			}
 			else
 			{
