@@ -25,6 +25,7 @@ package org.flixel.plugin
 		 */
 		override public function destroy():void
 		{
+			super.destroy();
 			clear();
 			_timers = null;
 		}
