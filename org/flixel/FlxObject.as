@@ -685,16 +685,24 @@ package org.flixel
 		 */
 		public function overlaps(ObjectOrGroup:FlxBasic,InScreenSpace:Boolean=false,Camera:FlxCamera=null):Boolean
 		{
+			if (ObjectOrGroup == null)
+				return false;
+			
 			if(ObjectOrGroup is FlxGroup)
 			{
 				var results:Boolean = false;
+				var basic:FlxBasic;
 				var i:uint = 0;
 				var members:Array = (ObjectOrGroup as FlxGroup).members;
 				var length:uint = (ObjectOrGroup as FlxGroup).length;
 				while(i < length)
 				{
-					if(overlaps(members[i++],InScreenSpace,Camera))
-						results = true;
+					basic = members[i++] as FlxBasic;
+					if ((basic != null) && basic.exists)
+					{
+						if(overlaps(basic,InScreenSpace,Camera))
+							results = true;
+					}
 				}
 				return results;
 			}
@@ -745,8 +753,12 @@ package org.flixel
 				var length:uint = (ObjectOrGroup as FlxGroup).length;
 				while(i < length)
 				{
-					if(overlapsAt(X,Y,members[i++],InScreenSpace,Camera))
-						results = true;
+					basic = members[i++] as FlxBasic;
+					if((basic != null) && basic.exists)
+					{
+						if(overlapsAt(X,Y,basic,InScreenSpace,Camera))
+							results = true;
+					}
 				}
 				return results;
 			}
