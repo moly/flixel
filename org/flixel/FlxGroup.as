@@ -172,8 +172,8 @@ package org.flixel
 		 */
 		public function add(Object:FlxBasic):FlxBasic
 		{
-			//Don't bother adding an object twice.
-			if(members.indexOf(Object) >= 0)
+			//Don't bother adding a null object or the same object twice.
+			if((Object == null) || members.indexOf(Object) >= 0)
 				return Object;
 			
 			//First, look for a null entry where we can add the object.
