@@ -396,6 +396,9 @@ package org.flixel
 		 */
 		protected function onFocus(FlashEvent:Event=null):void
 		{
+			if(!FlxG.pauseOnFocusLost)
+				return;
+			
 			if(!_debuggerUp && !useSystemCursor)
 				flash.ui.Mouse.hide();
 			FlxG.resetInput();
@@ -411,6 +414,9 @@ package org.flixel
 		 */
 		protected function onFocusLost(FlashEvent:Event=null):void
 		{
+			if(!FlxG.pauseOnFocusLost)
+				return;
+			
 			if((x != 0) || (y != 0))
 			{
 				x = 0;

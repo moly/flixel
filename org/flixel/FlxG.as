@@ -141,7 +141,11 @@ package org.flixel
 		/**
 		 * Setting this to true will disable/skip stuff that isn't necessary for mobile platforms like Android. [BETA]
 		 */
-		static public var mobile:Boolean; 
+		static public var mobile:Boolean;
+		/**
+		 * Whether or to not pause the game when focus is lost.
+		 */
+		static public var pauseOnFocusLost:Boolean;
 		/**
 		 * The global random number generator seed (for deterministic behavior in recordings and saves).
 		 */
@@ -1126,6 +1130,7 @@ package org.flixel
 			FlxG.levels = new Array();
 			FlxG.scores = new Array();
 			FlxG.visualDebug = false;
+			FlxG.pauseOnFocusLost = true;
 		}
 		
 		/**
