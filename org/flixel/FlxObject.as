@@ -685,9 +685,6 @@ package org.flixel
 		 */
 		public function overlaps(ObjectOrGroup:FlxBasic,InScreenSpace:Boolean=false,Camera:FlxCamera=null):Boolean
 		{
-			if (ObjectOrGroup == null)
-				return false;
-			
 			if(ObjectOrGroup is FlxGroup)
 			{
 				var results:Boolean = false;
