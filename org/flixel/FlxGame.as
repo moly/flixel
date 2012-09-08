@@ -551,6 +551,7 @@ package org.flixel
 			
 			//finally actually step through the game physics
 			FlxBasic._ACTIVECOUNT = 0;
+			FlxSound._ACTIVECOUNT = 0;
 			if(_replaying)
 			{
 				_replay.playNextFrame();
@@ -591,7 +592,10 @@ package org.flixel
 			update();
 			FlxG.mouse.wheel = 0;
 			if(_debuggerUp)
+			{
 				_debugger.perf.activeObjects(FlxBasic._ACTIVECOUNT);
+				_debugger.perf.activeSounds(FlxSound._ACTIVECOUNT);
+			}
 		}
 
 		/**

@@ -31,6 +31,8 @@ package org.flixel.system.debug
 		protected var _objectMarker:uint;
 		protected var _visibleObject:Array;
 		protected var _visibleObjectMarker:uint;
+		protected var _activeSound:Array;
+		protected var _soundMarker:uint;
 		
 		/**
 		 * Creates flashPlayerFramerate new window object.  This Flash-based class is mainly (only?) used by <code>FlxDebugger</code>.
@@ -46,7 +48,7 @@ package org.flixel.system.debug
 		public function Perf(Title:String, Width:Number, Height:Number, Resizable:Boolean=true, Bounds:Rectangle=null, BGColor:uint=0x7f7f7f7f, TopColor:uint=0x7f000000)
 		{
 			super(Title, Width, Height, Resizable, Bounds, BGColor, TopColor);
-			resize(90,66);
+			resize(90,84);
 			
 			_lastTime = 0;
 			_updateTimer = 0;
@@ -71,6 +73,8 @@ package org.flixel.system.debug
 			_objectMarker = 0;
 			_visibleObject = new Array(32);
 			_visibleObjectMarker = 0;
+			_activeSound = new Array(32);
+			_soundMarker = 0;
 		}
 		
 		/**
@@ -85,6 +89,7 @@ package org.flixel.system.debug
 			_flash = null;
 			_activeObject = null;
 			_visibleObject = null;
+			_activeSound = null;
 			super.destroy();
 		}
 		
@@ -115,6 +120,14 @@ package org.flixel.system.debug
 				output += uint(1/(flashPlayerFramerate/1000)) + "/" + FlxG.flashFramerate + "fps\n";
 				
 				output += Number( ( System.totalMemory * 0.000000954 ).toFixed(2) ) + "MB\n";
+				
+				var soundCount:uint = 0;
+				i = 0;
+				while(i < _soundMarker)
+					soundCount += _activeSound[i++];
+				soundCount /= _soundMarker;
+				
+				output += "S:" + soundCount + "\n";
 
 				var updateTime:uint = 0;
 				i = 0;
@@ -122,13 +135,9 @@ package org.flixel.system.debug
 					updateTime += _flixelUpdate[i++];
 				
 				var activeCount:uint = 0;
-				var te:uint = 0;
 				i = 0;
 				while(i < _objectMarker)
-				{
-					activeCount += _activeObject[i];
-					visibleCount += _visibleObject[i++];
-				}
+					activeCount += _activeObject[i++];
 				activeCount /= _objectMarker;
 				
 				output += "U:" + activeCount + " " + uint(updateTime/_flixelDrawMarker) + "ms\n";
@@ -145,7 +154,7 @@ package org.flixel.system.debug
 				visibleCount /= _visibleObjectMarker;
 
 				output += "D:" + visibleCount + " " + uint(drawTime/_flixelDrawMarker) + "ms";
-
+				
 				_text.text = output;
 
 				_flixelUpdateMarker = 0;
@@ -153,6 +162,7 @@ package org.flixel.system.debug
 				_flashMarker = 0;
 				_objectMarker = 0;
 				_visibleObjectMarker = 0;
+				_soundMarker = 0;
 				_updateTimer -= updateEvery;
 			}
 		}
@@ -205,6 +215,16 @@ package org.flixel.system.debug
 		public function visibleObjects(Count:int):void
 		{
 			_visibleObject[_visibleObjectMarker++] = Count;
+		}
+		
+		/**
+		 * Keep track of how many sounds were updated.
+		 * 
+		 * @param Count	How many sounds were updated.
+		 */
+		public function activeSounds(Count:int):void
+		{
+			_activeSound[_soundMarker++] = Count;
 		}
 	}
 }

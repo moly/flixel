@@ -78,8 +78,9 @@ package org.flixel.system
 			
 			var txt:TextField = new TextField();
 			txt.x = 2;
-			txt.width = 160;
-			txt.height = 16;
+			txt.y = -1;
+			txt.width = 162;
+			txt.height = 18;
 			txt.selectable = false;
 			txt.multiline = false;
 			txt.defaultTextFormat = new TextFormat("Courier",12,0xffffff);

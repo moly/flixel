@@ -13,6 +13,8 @@ package org.flixel
 	 */
 	public class FlxSound extends FlxBasic
 	{
+		static internal var _ACTIVECOUNT:uint;
+		
 		/**
 		 * The X position of this sound in world coordinates.
 		 * Only really matters if you are doing proximity/panning stuff.
@@ -175,6 +177,15 @@ package org.flixel
 		}
 		
 		/**
+		 * Updates the number of active sounds.
+		 */
+		override public function preUpdate():void
+		{
+			super.preUpdate();
+			_ACTIVECOUNT++;
+		}
+		
+		/**
 		 * Handles fade out, fade in, panning, proximity, and amplitude operations each frame.
 		 */
 		override public function update():void
@@ -188,7 +199,7 @@ package org.flixel
 			//Distance-based volume control
 			if(_target != null)
 			{
-				radial = 1- FlxU.getDistance(new FlxPoint(_target.x,_target.y),new FlxPoint(x,y))/_radius;
+				radial = 1 - FlxU.getDistance(new FlxPoint(_target.x,_target.y),new FlxPoint(x,y))/_radius;
 				if(radial < 0) radial = 0;
 				if(radial > 1) radial = 1;
 				

@@ -634,8 +634,11 @@ package org.flixel
 		 */
 		static internal function updateSounds():void
 		{
-			if((music != null) && music.active)
+			if ((music != null) && music.active)
+			{
+				music.preUpdate();
 				music.update();
+			}
 			if((sounds != null) && sounds.active)
 				sounds.update();
 		}
