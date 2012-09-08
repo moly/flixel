@@ -151,7 +151,7 @@ package org.flixel
 		/**
 		 * This function generates a new array of particle sprites to attach to the emitter.
 		 * 
-		 * @param	Graphics		If you opted to not pre-configure an array of FlxSprite objects, you can simply pass in a particle image or sprite sheet.
+		 * @param	Graphics		If you opted to not pre-configure an array of FlxParticle objects, you can simply pass in a particle image or sprite sheet.
 		 * @param	Quantity		The number of particles to generate when using the "create from image" option.
 		 * @param	BakedRotations	How many frames of baked rotation to use (boosts performance).  Set to zero to not use baked rotations.
 		 * @param	Multiple		Whether the image in the Graphics param is a single particle or a bunch of particles (if it's a bunch, they need to be square!).
