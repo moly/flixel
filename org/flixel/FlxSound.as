@@ -182,13 +182,13 @@ package org.flixel
 			if(_position != 0)
 				return;
 			
-			var radial:Number = 0.0;
+			var radial:Number = 1.0;
 			var fade:Number = 1.0;
 			
 			//Distance-based volume control
 			if(_target != null)
 			{
-				radial = FlxU.getDistance(new FlxPoint(_target.x,_target.y),new FlxPoint(x,y))/_radius;
+				radial = 1- FlxU.getDistance(new FlxPoint(_target.x,_target.y),new FlxPoint(x,y))/_radius;
 				if(radial < 0) radial = 0;
 				if(radial > 1) radial = 1;
 				
@@ -223,7 +223,7 @@ package org.flixel
 				fade = 1 - fade;
 			}
 			
-			_volumeAdjust = (1 - radial) * fade;
+			_volumeAdjust = radial * fade;
 			updateTransform();
 			
 			if((_transform.volume > 0) && (_channel != null))
