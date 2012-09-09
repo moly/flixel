@@ -844,19 +844,25 @@ package org.flixel
 		 * 
 		 * @param	Camera	The camera you want to remove.
 		 * @param	Destroy	Whether to call destroy() on the camera, default value is true.
+		 * @return	The removed camera.
 		 */
-		static public function removeCamera(Camera:FlxCamera,Destroy:Boolean=true):void
+		static public function removeCamera(Camera:FlxCamera,Destroy:Boolean=true):FlxCamera
 		{
-			try
-			{
+			if(FlxG._game.contains(Camera._flashSprite)
 				FlxG._game.removeChild(Camera._flashSprite);
-			}
-			catch(E:Error)
-			{
+			else
 				FlxG.log("Error removing camera, not part of game.");
-			}
+			
+			var index:int = FlxG.cameras.indexOf(Camera);
+			if((index < 0) || (index >= FlxG.cameras.length))
+				return null;
+			
+			FlxG.cameras.splice(index,1);
+				
 			if(Destroy)
 				Camera.destroy();
+				
+			return Camera;
 		}
 		
 		/**
