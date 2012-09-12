@@ -165,7 +165,7 @@ package org.flixel
 		override public function destroy():void
 		{
 			kill();
-
+			
 			_transform = null;
 			_sound = null;
 			_channel = null;
@@ -544,10 +544,13 @@ package org.flixel
 		 */
 		protected function gotID3(event:Event=null):void
 		{
-			FlxG.log("got ID3 info!");
-			name = _sound.id3.songName;
-			artist = _sound.id3.artist;
-			_sound.removeEventListener(Event.ID3, gotID3);
+			if(_sound != null)
+			{
+				FlxG.log("got ID3 info!");
+				name = _sound.id3.songName;
+				artist = _sound.id3.artist;
+				_sound.removeEventListener(Event.ID3, gotID3);
+			}
 		}
 	}
 }
