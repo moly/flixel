@@ -675,7 +675,7 @@ package org.flixel
 			var alpha:uint = Color >>> 24;
 			if(alpha == 255 || !BlendAlpha)
 			{
-				//buffer.fillRect(_flashRect,Color);
+				buffer.fillRect(_flashRect,Color);
 			}
 			else
 			{
