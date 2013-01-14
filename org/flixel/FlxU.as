@@ -571,7 +571,7 @@ package org.flixel
 			Point.x = PivotX + cos*dx - sin*dy;
 			Point.y = PivotY - sin*dx - cos*dy;
 			return Point;
-		};
+		}
 		
 		/**
 		 * Calculates the angle between two points.  0 degrees points straight up.
@@ -601,7 +601,7 @@ package org.flixel
 			else
 				angle += 90;
 			return angle;
-		};
+		}
 		
 		/**
 		 * Calculate the distance between two points.
